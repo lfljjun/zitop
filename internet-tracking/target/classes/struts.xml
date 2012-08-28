@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+    <constant name="struts.i18n.encoding" value="utf-8" />
+    <constant name="struts.ui.theme" value="simple" />
+    <constant name="struts.convention.result.path" value="/" /> 
+    <constant name="struts.convention.package.locators" value="actions" />  
+    <constant name="struts.convention.default.parent.package" value="zitop-default"/>
+    <constant name="struts.multipart.parser" value="com.zitop.infrastructure.struts2.multipart.JakartaMultiPartRequest" />
+    <package name="zitop-default" extends="struts-default">
+   		 <result-types>
+    		<!-- 恢复请示参数转换结果，设置restore_params为true时，重定向到action时，如果有requestParamRecorder拦截器会恢复请求参数 -->
+    		<result-type name="RestoreRequestParamRedirect" class="com.zitop.infrastructure.struts2.dispatcher.RestoreRequestParamRedirectResult"></result-type>
+    		
+    		<!-- 返回JSON类型 -->
+    		<result-type name="flexjson"  class="code.google.struts2jsonresult.JSONResult">
+    		 	<!-- format the output json -->  
+				 <param name="prettyPrint">true</param>  
+				 <param name="target">result</param>  
+			 </result-type>
+    	</result-types>
+    	
+    	<interceptors>
+    		<!-- 分页支持拦截器 -->
+    		<interceptor name="pagerSupport" class="com.zitop.infrastructure.struts2.interceptor.PagerSupportInterceptor"></interceptor>
+    		<!-- 恢复与记录请求参数拦截器 -->
+    		<interceptor name="requestParamRecorder" class="com.zitop.infrastructure.struts2.interceptor.RequestParamRecorderInterceptor"></interceptor>
+    		<!--  -->
+    		<interceptor name="actionPathInterceptor" class="com.zitop.infrastructure.struts2.interceptor.ActionPathInterceptor"></interceptor>
+    		<interceptor name="fileExceptionInterceptor" class="com.zitop.infrastructure.struts2.interceptor.FileExceptionInterceptor"></interceptor>
+    		<interceptor name="sysCodeConstInterceptor" class="com.zitop.interceptor.SysCodeConstInterceptor"></interceptor>
+    		
+    		
+    		
+    		<!-- 通用维护拦截堆栈，主要拦截（增，删，改）操作 -->
+    		<interceptor-stack name="zitopParamsPrepareParamsStack">
+    			<interceptor-ref name="actionPathInterceptor"/>
+    			<interceptor-ref name="paramsPrepareParamsStack"/>
+    		</interceptor-stack>
+    		
+    		<!-- 默认的拦截堆栈，添加了 requestParamRecorder，pagerSupport拦截器（主要用于查询[列表]）-->
+    		<interceptor-stack name="zitopDefaultStack">
+    			<interceptor-ref name="sysCodeConstInterceptor"/>
+    			<interceptor-ref name="actionPathInterceptor"/>
+    			<interceptor-ref name="requestParamRecorder"/>
+    			<interceptor-ref name="pagerSupport"/>
+    			<interceptor-ref name="scopedModelDriven"/>
+    			<interceptor-ref name="paramsPrepareParamsStack"/>
+    		</interceptor-stack>
+    		
+ 			
+    	</interceptors>
+    	
+    	<!-- 默认堆栈 -->
+    	<default-interceptor-ref name="zitopDefaultStack"/>
+    	
+    	<global-results>
+    		<result name="common_list" type="redirectAction" >
+    			<param name="namespace">${namespace}</param>
+    			<param name="actionName">${actionName+"-list"}</param>
+                <param name="restore_params">true</param>
+    		</result>
+    		
+    	</global-results>
+    	 
+    </package> 
+    <!--
+        使用Convention插件,实现约定大于配置的零配置文件风格.
+               特殊的Result路径在Action类中使用@Result设定.
+    -->
+</struts>

@@ -1,0 +1,57 @@
+
+
+/* icon */
+.icon_export,.icon_import,.icon_home,.icon_user,.icon_MyDocuments,.icon_listOK,.icon_listNO,.icon_system,.icon_lead,.icon_luck,.icon_search,.icon_mail,.icon_down,.icon_txt,.icon_team,.icon_MyPictures,.icon_MyMusic,.icon_NewFile,.icon_UsersFile,.icon_doc,.icon_xls,.icon_jpg,.icon_exe,.icon_zip,.icon_mp3,.icon_default,.icon_video,.icon_ppt,.icon_list,.icon_add,.icon_sub,.icon_back,.icon_next,.icon_del,.icon_smsList,.icon_edit,.icon_upload,.ts_grey,.ts_red,.ts_green,.window_close,.editOKicon,.delicon,.icon_yes,.icon_no,.icon_wait,.icon_day,.icon_jt,.icon_addUser,.icon_keygo,.icon_sendOk,.icon_sendOn
+{background-image:url(../images/icon.gif); background-repeat:no-repeat; overflow:hidden;}
+
+.icon_import{background-position:-381px 0px; padding-left:17px;}
+.icon_export{background-position:-408px 0px; padding-left:14px;}
+.icon_home{background-position:-432px 0px; padding-left:14px;}
+.icon_user{background-position:-457px 0px; padding-left:14px;}
+.icon_MyDocuments{background-position:-481px 0px; padding-left:14px;}
+.icon_listOK{background-position:-505px 0px; padding-left:14px;}
+.icon_listNO{background-position:-530px 0px; padding-left:14px;}
+.icon_system{background-position:-555px 0px; padding-left:14px;}
+.icon_lead{background-position:-381px -26px; padding-left:14px;}
+.icon_luck{background-position:-408px -26px; padding-left:14px;}
+.icon_search{background-position:-432px -26px; padding-left:14px;}
+.icon_mail{background-position:-457px -23px; padding-left:14px;}
+.icon_down{background-position:-481px -26px;}
+.icon_down img{width:15px; height:15px;}
+.icon_txt{background-position:-555px -26px; padding-left:14px;}
+.icon_team{background-position:-381px -50px; padding-left:14px;}
+.icon_MyPictures{background-position:-481px -50px; padding-left:14px;}
+.icon_MyMusic{background-position:-505px -50px; padding-left:14px;}
+.icon_NewFile{background-position:-530px -50px; padding-left:14px;}
+.icon_UsersFile{background-position:-555px -50px; padding-left:14px;}
+.icon_list{background-position:-408px -50px; padding-left:14px;}
+.icon_doc{background-position:-381px -74px; padding-left:16px;}
+.icon_xls{background-position:-408px -74px; padding-left:16px;}
+.icon_jpg{background-position:-432px -50px; padding-left:16px;}
+.icon_exe{background-position:-432px -74px; padding-left:16px;}
+.icon_zip{background-position:-457px -74px; padding-left:16px;}
+.icon_mp3{background-position:-481px -74px; padding-left:16px;}
+.icon_default{background-position:-505px -74px; padding-left:16px;}
+.icon_video{background-position:-530px -74px; padding-left:16px;}
+.icon_ppt{background-position:-555px -74px; padding-left:16px;}
+.icon_add{background-position:-505px -26px; padding-left:14px;}
+.icon_sub{background-position:-530px -26px; padding-left:13px;}
+.icon_back{background-position:-381px -99px; padding-left:12px;}
+.icon_next{background-position:-409px -99px; padding-left:12px;}
+.icon_del{background-position:-481px -96px; padding-left:9px;}
+.icon_smsList{background-position:-457px -50px; padding-left:16px;}
+.icon_edit{background-position:-505px -99px; padding-left:14px;}
+.icon_upload{background-position:-530px -99px; padding-left:16px;}
+.icon_yes{background-position:-590px -61px; padding-left:12px; color:#4A8F01;}
+.billTable .icon_yes{background-position:-590px -59px; padding-left:12px;}
+
+.icon_no{background-position:-590px -82px; padding-left:12px; color:#F64000;}
+.icon_wait{background-position:-590px -103px; padding-left:12px; color:#999;}
+.icon_day{background-position:-555px -99px;}
+.icon_day img{width:14px; height:16px;}
+.icon_jt{background-position:-308px 0;padding-left:28px;height:25px;float:left;}
+.icon_addUser{background-position:-337px -32px;width:32px;height:32px;float:left;}
+.icon_keygo{background-position:-305px -32px;width:32px;height:32px;float:left;}
+.icon_sendOk,.icon_sendOn{width:25px;height:25px;float:left;margin-right:10px;}
+.icon_sendOk{background-position:-343px 0px;}
+.icon_sendOn{background-position:-308px 0px;}

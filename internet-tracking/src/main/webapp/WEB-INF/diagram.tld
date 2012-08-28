@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		version="2.0"
+		xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd">
+	<display-name>图表展示自定义tag</display-name>
+	<tlib-version>2.0</tlib-version>
+	<short-name>d</short-name>
+	<uri>/diagram</uri>
+	
+	<tag>
+		<name>isPie</name>
+		<tag-class>com.zitop.util.tags.IsPieTag</tag-class>
+		<body-content>JSP</body-content>
+		<attribute>
+			<name>indexItems</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>terms</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>eq</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	
+	<tag>
+		<name>isSingleTerm</name>
+		<tag-class>com.zitop.util.tags.IsSingleTerm</tag-class>
+		<attribute>
+			<name>terms</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	
+	<tag>
+		<name>onlyOneIndex</name>
+		<body-content>JSP</body-content>
+		<tag-class>com.zitop.util.tags.OnlyOneChildTag</tag-class>
+		<attribute>
+			<name>parentId</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	
+</taglib> 

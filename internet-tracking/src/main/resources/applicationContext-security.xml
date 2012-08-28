@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+    					http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                        http://www.springframework.org/schema/security 
+                        http://www.springframework.org/schema/security/spring-security-3.0.xsd">
+
+
+	<http access-denied-page="${access-denied-page}" entry-point-ref="authenticationProcessingFilterEntryPoint">
+		<intercept-url pattern="/index.jsp" filters="none" />
+		<intercept-url pattern="/" filters="none" />
+		<intercept-url pattern="/captcha" filters="none" />
+		<intercept-url pattern="/static/**" filters="none" />
+		<intercept-url pattern="/static-main/**" filters="none" />
+
+<!-- 
+	<form-login login-page="http://localhost:9091/mkb/v2/"
+			authentication-failure-url="http://localhost:9091/mkb/v2/"
+			default-target-url="/admin/home.action" login-processing-url="/admin/j_spring_security_check"/>
+		<logout logout-success-url="http://localhost:9091/mkb/v2/" logout-url="/admin/j_spring_security_logout"/>
+ -->
+		<!-- 使用带验证码的Filter来代替默认的 form-login -->
+		<custom-filter ref="validateCodeAuthenticationFilter" position="FORM_LOGIN_FILTER" />
+			
+		<logout logout-success-url="${logout-success-url}" logout-url="${logout-url}"/>
+		<remember-me />
+		<!-- Uncomment to limit the number of sessions a user can have -->
+		<session-management invalid-session-url="${invalid-session-url}">
+			<concurrency-control max-sessions="100"
+				error-if-maximum-exceeded="false" />
+		</session-management>
+
+		<custom-filter ref="resourceSecurityInterceptor" before="FILTER_SECURITY_INTERCEPTOR" />
+	</http>
+
+
+	<authentication-manager alias="authenticationManager">
+		<authentication-provider user-service-ref="userDetailService">
+			<password-encoder hash="md5" />
+		</authentication-provider>
+	</authentication-manager>
+	
+	
+	
+	<!-- 带验证码的Filter -->
+	<beans:bean id="validateCodeAuthenticationFilter"
+		class="com.zitop.security.service.extend.ValidateCodeUsernamePasswordAuthenticationFilter">
+		<beans:property name="filterProcessesUrl" value="${login-processing-url}"></beans:property>
+		<beans:property name="authenticationSuccessHandler"
+			ref="loginLogAuthenticationSuccessHandler"></beans:property>
+		<beans:property name="authenticationFailureHandler"
+			ref="simpleUrlAuthenticationFailureHandler"></beans:property>
+		<beans:property name="authenticationManager" ref="authenticationManager"></beans:property>
+		<beans:property name="allowEmptyValidateCode" value="${allowEmptyValidateCode}"></beans:property>
+		<beans:property name="authenticationChannelOn" value="${authentication-channel-on}" ></beans:property>
+		<beans:property name="authenticationChannelKey" value="${authentication-channel-key}" ></beans:property>
+	</beans:bean>
+	<!-- 登录成功后转向页面-->
+	<beans:bean id="loginLogAuthenticationSuccessHandler"
+		class="org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler">
+		<beans:property name="defaultTargetUrl" value="${authentication-success-url}"></beans:property>
+	</beans:bean>
+	<!-- 登录失败后转向页面-->
+	<beans:bean id="simpleUrlAuthenticationFailureHandler"
+		class="com.zitop.security.service.extend.SimpleUrlAuthenticationFailureWitthErrorCodeHandler">
+		<beans:property name="defaultFailureUrl" value="${authentication-failure-url}"></beans:property>
+	</beans:bean>
+	<!-- 登录入口 -->
+	<beans:bean id="authenticationProcessingFilterEntryPoint"
+		class="org.springframework.security.web.authentication.AuthenticationProcessingFilterEntryPoint">
+		<beans:property name="loginFormUrl" value="${login-form-url}"></beans:property>
+	</beans:bean>
+
+	<beans:bean id="resourceSecurityInterceptor"
+		class="org.springframework.security.web.access.intercept.FilterSecurityInterceptor">
+		<beans:property name="authenticationManager" ref="authenticationManager" />
+		<beans:property name="accessDecisionManager" ref="accessDecisionManager" />
+		<beans:property name="securityMetadataSource">
+			<beans:ref local="databaseSecureResourceFilterInvocationDefinitionSource" />
+		</beans:property>
+		<beans:property name="observeOncePerRequest" value="false" />
+	</beans:bean>
+
+	<beans:bean id="accessDecisionManager"
+		class="org.springframework.security.access.vote.AffirmativeBased">
+		<beans:property name="allowIfAllAbstainDecisions"
+			value="false" />
+		<beans:property name="decisionVoters">
+			<beans:list>
+				<beans:bean class="org.springframework.security.access.vote.RoleVoter">
+				</beans:bean>
+				<beans:bean
+					class="org.springframework.security.access.vote.AuthenticatedVoter" />
+			</beans:list>
+		</beans:property>
+	</beans:bean>
+
+	<beans:bean id="databaseSecureResourceFilterInvocationDefinitionSource"
+		class="com.zitop.security.service.extend.DatabaseSecureResourceFilterInvocationDefinitionSource">
+		<beans:property name="securityResourceCache" ref="securityResourceCache" />
+	</beans:bean>
+	
+	<beans:bean id="userDetailService"
+		class="com.zitop.security.service.extend.UserDetailServiceImpl">
+		<beans:property name="userService" ref="userService" />
+		<beans:property name="roleService" ref="roleService" />
+	</beans:bean>
+	
+	<beans:bean id="securityResourceCache"
+		class="com.zitop.security.service.extend.MemSecurityResourceCache">
+		<beans:property name="securityResourceService" ref="securityResourceService" />
+	</beans:bean>
+
+</beans:beans>
+

@@ -1,0 +1,126 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.zitop.tracking</groupId>
+	<artifactId>internet-tracking</artifactId>
+	<packaging>war</packaging>
+	<name>internet-tracking WebApp</name>
+	<url>http://maven.apache.org</url>
+	<version>1.0</version>
+	<parent>
+		<artifactId>zitop-template-parent</artifactId>
+		<groupId>com.zitop</groupId>
+		<version>1.0-SNAPSHOT</version>
+		<relativePath>pom-parent.xml</relativePath>
+	</parent>
+
+	<properties>
+		<!-- 主要依赖库的版本定义 -->
+		<zitop-infrastructure.version>1.0.4.4</zitop-infrastructure.version>
+		<spring-security.version>3.0.5.RELEASE</spring-security.version>
+		<!-- Plugin的属性定义 -->
+		<maven-surefire-plugin.skip>false</maven-surefire-plugin.skip>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+
+	<dependencies>
+		<!-- zitop 公共基础包 -->
+		<dependency>
+			<groupId>com.zitop</groupId>
+			<artifactId>zitop-infrastructure</artifactId>
+			<version>${zitop-infrastructure.version}</version>
+		</dependency>
+
+		<!-- srping security配置 -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core</artifactId>
+			<version>${spring-security.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>${spring-security.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>${spring-security.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId>
+			<version>${spring-security.version}</version>
+		</dependency>
+
+		<!-- 项目的特殊配置 -->
+		<dependency>
+		  <groupId>batik</groupId>
+		  <artifactId>batik-transcoder</artifactId>
+		  <version>1.6-1</version>
+		</dependency>
+		<!-- 连接池 -->
+		<dependency>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+			<version>1.2</version>
+			<exclusions>
+				<exclusion>
+					<groupId>xml-apis</groupId>
+					<artifactId>xml-apis</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>xerces</groupId>
+					<artifactId>xercesImpl</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<!-- 验证码 -->
+		<dependency>
+			<groupId>org.patchca</groupId>
+			<artifactId>patchca</artifactId>
+			<version>0.5.0</version>
+		</dependency>
+		<dependency>
+			<groupId>jxl</groupId>
+			<artifactId>jxl</artifactId>
+			<version>2.6.6</version>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+		<finalName>tracking</finalName>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<skip>true</skip>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.mortbay.jetty</groupId>
+				<artifactId>maven-jetty-plugin</artifactId>
+				<version>6.1.22</version>
+				<configuration>
+					<!-- 改这里，项目访问路径 -->
+					<contextPath>/tracking</contextPath>
+					<webDefaultXml>webdefault.xml</webDefaultXml>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>

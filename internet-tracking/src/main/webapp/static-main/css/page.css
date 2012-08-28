@@ -1,0 +1,15 @@
+/*CSS page style*/
+.PageLine{width:99%; height:25px; margin-top:10px;}
+.PageLineInfo{float:left; padding-left:10px; line-height:25px;}
+.PageLineInfo a{margin:0px 3px 0px 3px; text-decoration:underline;}
+div.page{float:right; padding:3px; margin:5px 3px 3px 3px; font-family: Arial; font-size:9pt; text-align:center;}
+div.page a{border:#8db5d7 1px solid; color:#000; text-decoration:none; margin:0px 2px 0px 2px; padding:2px 5px 2px 5px;}
+div.page a:hover {border: red 1px solid; margin:0px 2px 0px 2px; padding:2px 5px 2px 5px;}
+div.page a:active {border: red 1px solid; margin:0px 2px 0px 2px; padding:2px 5px 2px 5px;}
+div.page span.current {border: #E89954 1px solid; margin:0px 2px 0px 2px; padding:2px 5px 2px 5px; color:#000; font-weight:bolder; background-color:#FFCA7D}
+div.page span.disabled {border: #CCC 1px solid; margin:0px 2px 0px 2px; padding:2px 5px 2px 5px; color:#CCC;}
+div.page span.pageinfo {color: #999; font-size:9pt; margin-right:10px; vertical-align:bottom;}
+div.page span.pageinfo b {color: #666; margin:0px 2px 0px 2px;}
+/*CSS page style*/
+
+.mainList div.page{width:100%; float:left; text-align:right; margin:0; padding:10px 20px 10px 0; background-color:#F9F9F9;}
